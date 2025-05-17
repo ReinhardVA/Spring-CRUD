@@ -5,8 +5,9 @@ import com.example.demo.entity.Department;
 import java.util.List;
 
 public interface DepartmentService {
-    Department SaveDepartment(Department department);
-    List<Department> FetchDepartmentList();
-    Department UpdateDepartment(Department department, Long departmentId);
-    void DeleteDepartmentById(Long departmentId);
+    Department SaveDepartment(long departmentId, String departmentName, String departmentAddress, String departmentCode);
+    List<Department> GetAllDepartment();
+    List<Department> GetDepartmentByDepartmentAddress(String departmentAddress);
+    Department GetDepartmentByDepartmentId(long departmentId);
+    int DeleteDepartmentById(long departmentId);
 }

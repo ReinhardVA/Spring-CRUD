@@ -7,29 +7,49 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
 public class DepartmentController {
 
-    @Autowired private DepartmentService departmentService;
+    @Autowired DepartmentService departmentService;
 
-    @PostMapping("/departments")
-    public Department SaveDepartment(@RequestBody Department department){
-        return departmentService.SaveDepartment(department);
+    @RequestMapping("/departments")
+    @ResponseBody
+    public List<Department> GetDepartments(){
+        return departmentService.GetAllDepartment();
     }
 
-    @GetMapping("/departments")
-    public List<Department> FetchDepartmentList(){
-        return departmentService.FetchDepartmentList();
+    @RequestMapping("/getDepartment")
+    @ResponseBody
+    public List<Department> GetDepartment(@RequestParam("departmentAddress") String departmentAddress){
+        return departmentService.GetDepartmentByDepartmentAddress(departmentAddress);
     }
 
-    @PutMapping("/departments/{id}")
-    public Department UpdateDepartment(@RequestBody Department department, @PathVariable("id") Long departmentId){
-        return departmentService.UpdateDepartment(department, departmentId);
+    @RequestMapping("/getDepartmentById")
+    @ResponseBody
+    public Department GetDepartmentById(@RequestParam("departmentId") long departmentId){
+        return departmentService.GetDepartmentByDepartmentId(departmentId);
     }
 
-    @DeleteMapping("/departments/{id}")
+    @RequestMapping("/addDepartment")
+    @ResponseBody
+    public String AddDepartment(@RequestParam("departmentId") long departmentId,
+                                @RequestParam("departmentName") String departmentName,
+                                @RequestParam("departmentAddress") String departmentAddress,
+                                @RequestParam("departmentCode") String departmentCode){
+        if(departmentService.SaveDepartment(departmentId, departmentName, departmentAddress, departmentCode) != null){
+            return "Department Added!";
+        }
+        else{
+            return "Department can not added, something went wrong.";
+        }
+    }
 
-    public String DeleteDepartmentById(@PathVariable("id") Long departmentId){
-        departmentService.DeleteDepartmentById(departmentId);
-        return "Deleted Successfully";
+    public String DeleteDepartment(@RequestParam("departmentId") long departmentId){
+        if(departmentService.DeleteDepartmentById(departmentId) == 1){
+            return "Department deleted successfully";
+        }
+        else{
+            return "Something went wrong!";
+        }
     }
 }

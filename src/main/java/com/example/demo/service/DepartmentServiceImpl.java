@@ -1,45 +1,52 @@
 package com.example.demo.service;
 
+
 import com.example.demo.entity.Department;
 import com.example.demo.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
+@Service
 public class DepartmentServiceImpl implements DepartmentService{
     @Autowired
     private DepartmentRepository departmentRepository;
+
     @Override
-    public Department SaveDepartment(Department department) {
+    public Department SaveDepartment(long departmentId, String departmentName, String departmentAddress, String departmentCode){
+        Department department = new Department();
+        department.SetDepartmentId(departmentId);
+        department.SetDepartmentName(departmentName);
+        department.SetDepartmentAddress(departmentAddress);
+        department.SetDepartmentCode(departmentCode);
         return departmentRepository.save(department);
     }
+
     @Override
-    public List<Department> FetchDepartmentList() {
-        return (List<Department>) departmentRepository.findAll();
+    public List<Department> GetAllDepartment() {
+        return departmentRepository.findAll();
     }
 
     @Override
-    public Department UpdateDepartment(Department department, Long departmentId) {
-        Department depDB = departmentRepository.findById(departmentId).get();
-
-        if(Objects.nonNull(department.getDepartmentName()) && !"".equalsIgnoreCase(department.getDepartmentName())){
-            depDB.setDepartmentName(department.getDepartmentName());
-        }
-
-        if(Objects.nonNull(department.getDepartmentAddress()) && !"".equalsIgnoreCase(department.getDepartmentAddress())){
-            depDB.setDepartmentAddress(department.getDepartmentAddress());
-        }
-
-        if(Objects.nonNull(department.getDepartmentCode()) && !"".equalsIgnoreCase(department.getDepartmentCode())){
-            depDB.setDepartmentCode(department.getDepartmentCode());
-        }
-
-        return departmentRepository.save(depDB);
+    public List<Department> GetDepartmentByDepartmentAddress(String departmentAddress) {
+        List<Department> department = departmentRepository.FindByDepartmentAddress(departmentAddress);
+        return department;
     }
 
     @Override
-    public void DeleteDepartmentById(Long departmentId) {
-        departmentRepository.deleteById(departmentId);
+    public Department GetDepartmentByDepartmentId(long departmentId) {
+        Department department = departmentRepository.FindByDepartmentId(departmentId);
+        return department;
+    }
+
+    @Override
+    public int DeleteDepartmentById(long departmentId) {
+        Department department = departmentRepository.FindByDepartmentId(departmentId);
+        if(department != null){
+            departmentRepository.delete(department);
+            return 1;
+        }
+        return -1;
     }
 }

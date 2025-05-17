@@ -1,44 +1,45 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Document(collection = "department")
 public class Department {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long departmentId;
+    private String id;
+    private long departmentId;
     private String departmentName;
     private String departmentAddress;
     private String departmentCode;
 
-    public String getDepartmentName() {
+    public String GetId(){
+        return id;
+    }
+    public void SetId(String id){
+        this.id = id;
+    }
+    public long GetDepartmentId(){
+        return departmentId;
+    }
+    public void SetDepartmentId(long departmentID){
+        this.departmentId = departmentID;
+    }
+    public String GetDepartmentName(){
         return departmentName;
     }
-    public void setDepartmentName(String departmentName){
+    public void SetDepartmentName(String departmentName){
         this.departmentName = departmentName;
     }
-    public String getDepartmentAddress(){
+    public String GetDepartmentAddress(){
         return departmentAddress;
     }
-    public void setDepartmentAddress(String departmentAddress){
+    public void SetDepartmentAddress(String departmentAddress){
         this.departmentAddress = departmentAddress;
     }
-    public String getDepartmentCode() {
+    public String GetDepartmentCode(){
         return departmentCode;
     }
-    public void setDepartmentCode(String departmentCode){
+    public void SetDepartmentCode(String departmentCode){
         this.departmentCode = departmentCode;
     }
 }
