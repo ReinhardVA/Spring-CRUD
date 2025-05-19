@@ -14,38 +14,38 @@ public class DepartmentController {
 
     @RequestMapping("/departments")
     @ResponseBody
-    public List<Department> GetDepartments(){
-        return departmentService.GetAllDepartment();
+    public List<Department> getDepartments(){
+        return departmentService.getAllDepartment();
     }
 
     @RequestMapping("/getDepartment")
     @ResponseBody
-    public List<Department> GetDepartment(@RequestParam("departmentAddress") String departmentAddress){
-        return departmentService.GetDepartmentByDepartmentAddress(departmentAddress);
+    public List<Department> getDepartment(@RequestParam("departmentAddress") String departmentAddress){
+        return departmentService.getDepartmentByDepartmentAddress(departmentAddress);
     }
 
     @RequestMapping("/getDepartmentById")
     @ResponseBody
-    public Department GetDepartmentById(@RequestParam("departmentId") long departmentId){
-        return departmentService.GetDepartmentByDepartmentId(departmentId);
+    public Department getDepartmentById(@RequestParam("departmentId") long departmentId){
+        return departmentService.getDepartmentByDepartmentId(departmentId);
     }
 
     @RequestMapping("/addDepartment")
     @ResponseBody
-    public String AddDepartment(@RequestParam("departmentId") long departmentId,
+    public String addDepartment(@RequestParam("departmentId") long departmentId,
                                 @RequestParam("departmentName") String departmentName,
                                 @RequestParam("departmentAddress") String departmentAddress,
                                 @RequestParam("departmentCode") String departmentCode){
-        if(departmentService.SaveDepartment(departmentId, departmentName, departmentAddress, departmentCode) != null){
+        if(departmentService.saveDepartment(departmentId, departmentName, departmentAddress, departmentCode) != null){
             return "Department Added!";
         }
         else{
             return "Department can not added, something went wrong.";
         }
     }
-
-    public String DeleteDepartment(@RequestParam("departmentId") long departmentId){
-        if(departmentService.DeleteDepartmentById(departmentId) == 1){
+    @RequestMapping("/deleteDepartment")
+    public String deleteDepartment(@RequestParam("departmentId") long departmentId){
+        if(departmentService.deleteDepartmentById(departmentId) == 1){
             return "Department deleted successfully";
         }
         else{

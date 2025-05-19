@@ -14,35 +14,35 @@ public class DepartmentServiceImpl implements DepartmentService{
     private DepartmentRepository departmentRepository;
 
     @Override
-    public Department SaveDepartment(long departmentId, String departmentName, String departmentAddress, String departmentCode){
+    public Department saveDepartment(long departmentId, String departmentName, String departmentAddress, String departmentCode){
         Department department = new Department();
-        department.SetDepartmentId(departmentId);
-        department.SetDepartmentName(departmentName);
-        department.SetDepartmentAddress(departmentAddress);
-        department.SetDepartmentCode(departmentCode);
+        department.setDepartmentId(departmentId);
+        department.setDepartmentName(departmentName);
+        department.setDepartmentAddress(departmentAddress);
+        department.setDepartmentCode(departmentCode);
         return departmentRepository.save(department);
     }
 
     @Override
-    public List<Department> GetAllDepartment() {
+    public List<Department> getAllDepartment() {
         return departmentRepository.findAll();
     }
 
     @Override
-    public List<Department> GetDepartmentByDepartmentAddress(String departmentAddress) {
-        List<Department> department = departmentRepository.FindByDepartmentAddress(departmentAddress);
+    public List<Department> getDepartmentByDepartmentAddress(String departmentAddress) {
+        List<Department> department = departmentRepository.findByDepartmentAddress(departmentAddress);
         return department;
     }
 
     @Override
-    public Department GetDepartmentByDepartmentId(long departmentId) {
-        Department department = departmentRepository.FindByDepartmentId(departmentId);
+    public Department getDepartmentByDepartmentId(long departmentId) {
+        Department department = departmentRepository.findByDepartmentId(departmentId);
         return department;
     }
 
     @Override
-    public int DeleteDepartmentById(long departmentId) {
-        Department department = departmentRepository.FindByDepartmentId(departmentId);
+    public int deleteDepartmentById(long departmentId) {
+        Department department = departmentRepository.findByDepartmentId(departmentId);
         if(department != null){
             departmentRepository.delete(department);
             return 1;

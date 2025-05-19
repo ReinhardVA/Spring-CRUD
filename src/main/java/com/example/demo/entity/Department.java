@@ -12,34 +12,34 @@ public class Department {
     private String departmentAddress;
     private String departmentCode;
 
-    public String GetId(){
+    public String getId(){
         return id;
     }
-    public void SetId(String id){
+    public void setId(String id){
         this.id = id;
     }
-    public long GetDepartmentId(){
+    public long getDepartmentId(){
         return departmentId;
     }
-    public void SetDepartmentId(long departmentID){
+    public void setDepartmentId(long departmentID){
         this.departmentId = departmentID;
     }
-    public String GetDepartmentName(){
+    public String getDepartmentName(){
         return departmentName;
     }
-    public void SetDepartmentName(String departmentName){
+    public void setDepartmentName(String departmentName){
         this.departmentName = departmentName;
     }
-    public String GetDepartmentAddress(){
+    public String getDepartmentAddress(){
         return departmentAddress;
     }
-    public void SetDepartmentAddress(String departmentAddress){
+    public void setDepartmentAddress(String departmentAddress){
         this.departmentAddress = departmentAddress;
     }
-    public String GetDepartmentCode(){
+    public String getDepartmentCode(){
         return departmentCode;
     }
-    public void SetDepartmentCode(String departmentCode){
+    public void setDepartmentCode(String departmentCode){
         this.departmentCode = departmentCode;
     }
 }
